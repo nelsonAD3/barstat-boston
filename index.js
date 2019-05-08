@@ -27,7 +27,7 @@ loadScript('occ_db.js');
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: luckys_coords,
-    zoom: 15,
+    zoom: 13,
     styles: [
       {
         "elementType": "geometry",
@@ -406,41 +406,8 @@ function initMap() {
 
   });
 
-
   infoWindow = new google.maps.InfoWindow;
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      position = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-
-      // infoWindow.setPosition(position);
-      // infoWindow.setContent('You are here.');
-      infoWindow.open(map);
-      map.setCenter(position);
-      map.setZoom(14);
-    }, function () {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
-  }
-
-
-
-
-  //error handling
-  function handleLocationError(browserHasGeolocation, infoWindow, position) {
-    infoWindow.setPosition(position);
-    infoWindow.setContent(browserHasGeolocation ?
-      'Please select a bar' :
-      'Error: Your browser doesn\'t support geolocation.');
-    infoWindow.open(map);
-  }
-
+  
   //end of init map function
 }
 
