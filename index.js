@@ -1,9 +1,5 @@
-// 'use strict';
 
-//all methods s here
-
-//one - set up map and ask for location permission
-//two - user clicks on restaurant on map and intializes a call to grab info about the location.
+//globals
 var map, infoWindow;
 var luckys_coords = { lat: 42.3502, lng: -71.0484 };
 var scorpion_coords = { lat: 42.3530, lng: -71.0476 };
@@ -23,10 +19,11 @@ function loadScript(url) {
   script.src = url;
   head.appendChild(script);
 }
+//load up database
 loadScript('occ_db.js');
 
 
-
+//initialize map w markers for supported bars.
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: luckys_coords,
@@ -410,8 +407,6 @@ function initMap() {
   });
 
 
-
-
   infoWindow = new google.maps.InfoWindow;
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
@@ -465,41 +460,21 @@ function postLocationToFeed(placeName, placeAddress, placePhone) {
 
 function emptyList() {
   $('.request-list').empty();
-  console.log('emptying element..');
+  
 }
 
-function removeButton() {
-  $('.location-form-check').empty();
-  console.log('removing element..');
-
-  $('.form-div').append(
-    // `<li><h3>${placeNAme}</h3>
-    `
-    <div class="div-times">
-    <span id="span-times">Loading...Results will be posted below.</span>
-    </div>           
-    `
-  )
-}
 
 function setListeners() {
 
   $('#remove-element').submit(event => {
     event.preventDefault();
-
     emptyList();
   });
 
-  // $('#location-form-check').submit(event => {
-
-  console.log('retrieving occupancy percent data...');
-  // removeButton();
-  // emptyList();
   $("#div-graph").removeClass("hidden");
   formatOccData(selected_info);
   getJsonResponse();
 
-  // });
 
 }
 
@@ -542,7 +517,7 @@ function formatQueryParams(params) {
 
 function displayResults(responseJson) {
   let yt_url = yt_string + responseJson.items[0].id.videoId;
-  console.log(yt_url);
+
   for (let i = 0; i < responseJson.items.length; i++) {
 
     $('.request-list').append(
@@ -551,8 +526,6 @@ function displayResults(responseJson) {
       </li>`
     )
   };
-
-  //      <img label = 'youtube search result thumbnail' src='${responseJson.items[i].snippet.thumbnails.default.url}'>
 
   $('#results').removeClass('hidden');
 };
@@ -585,7 +558,7 @@ function formatOccData(info) {
     case 6:
       day = "Sa";
   }
-  // console.log("current day = "+day);
+  
 
   //manipulate hour
   let hour = current_date.getHours();
@@ -606,7 +579,7 @@ function formatOccData(info) {
       hour = hour - 6;
       break;
   }
-  // console.log('hour after case: '+hour);
+  
   const current_hour = current_date.getHours();
 
   //now cycle through the json response to get what we need -> current occupancy for the rest of the night
@@ -614,27 +587,25 @@ function formatOccData(info) {
 
   //get the current hour and return the rest of the day's occupancy data
   let limit = occ_array.length;
-  // let hour_info;
-  // let occ_info;
-  // console.log("curr hour: "+current_hour+"limit: "+limit);
+
   google.charts.load("current", { packages: ["corechart"] });
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
     let occ_data = [['Times', 'Occupancy Percent']];
     for (let i = 4; i < limit; i++) {
-      console.log('in for loop, hour: ' + occ_array[i].hour + ' occupancy: ' + occ_array[i].occupancyPercent);
+      // console.log('in for loop, hour: ' + occ_array[i].hour + ' occupancy: ' + occ_array[i].occupancyPercent);
       // hour_info += occ_array[i].hour;
       // occ_info += occ_array[i].occupancyPercent;
       occ_data.push([occ_array[i].hour, occ_array[i].occupancyPercent]);
     }
-    console.log(occ_data);
+
     var data = google.visualization.arrayToDataTable(occ_data);
 
     let ticks=[];
     for (let i = 4; i < limit; i++) {
       ticks.push(occ_array[i].hour);
     }
-    console.log('ticks= '+ticks);
+   
 
     var options = {
       title: `Occupancy Percent for ${selected_name}`,
@@ -664,31 +635,5 @@ function formatOccData(info) {
     var chart = new google.visualization.ColumnChart(document.getElementById('div-graph'));
     chart.draw(data, options);
   }
-  // $( "#div-graph" ).toggleClass( "hidden" );
 
-
-  // $('.request-list').append(
-  //   // `<li><h3>${placeNAme}</h3>
-  //   `
-  //   <div class="div-graph">
-  //   <span class="span-hour">Hour: ${occ_array[i].hour}</span><span class="span-occ"> ~ ${occ_array[i].occupancyPercent}% Full</span>
-  //   </div>           
-  //   `
-  // )
-  // }
 }
-
-
-// old button
-        // <form id = "location-form-check">
-        //     <input class="location-input" type="submit" value="Check Occupancy Data"></button>
-        // </form>
-
-        // </div>
-
-        // <div class="form-div">
-        //     <form id = "remove-element">
-        //         <input class="location-input" type="submit" value="Remove Location"></button>
-        //     </form>
-
-        // </div>

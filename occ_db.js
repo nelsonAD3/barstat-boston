@@ -2299,25 +2299,3 @@ var lincoln_info = [{
 var lincoln_PlaceID = "ChIJ6UDUh4l644kR9-SSfd-2yIk";
 
 
-
-
-    //   [
-    //   ['Times', 'Occupancy Percent'],
-    //   ['9', occ_array[3].occupancyPercent],
-    //   ['10', occ_array[4].occupancyPercent],
-    //   ['11', occ_array[5].occupancyPercent],
-    //   ['Noon', occ_array[6].occupancyPercent],
-    //   ['1', occ_array[7].occupancyPercent],
-    //   ['2', occ_array[8].occupancyPercent],
-    //   ['3', occ_array[9].occupancyPercent],
-    //   ['4', occ_array[10].occupancyPercent],
-    //   ['5', occ_array[11].occupancyPercent],
-    //   ['6', occ_array[12].occupancyPercent],
-    //   ['7', occ_array[13].occupancyPercent],
-    //   ['8', occ_array[14].occupancyPercent],
-    //   ['9', occ_array[15].occupancyPercent],
-    //   ['10', occ_array[16].occupancyPercent],
-    //   ['11', occ_array[17].occupancyPercent],
-    //   ['Midnight', occ_array[18].occupancyPercent],
-    //   ['1', occ_array[19].occupancyPercent],
-    // ]

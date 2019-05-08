@@ -31,14 +31,12 @@
 
   #map {
     height: 100%;
-    /* background:white; */
   }
 
   .gm-style-iw-d{
     color:#696969;
   }
 
-  /* Optional: Makes the sample page fill the window. */
   html, body {
     height: 100%;
     margin: 5%;
@@ -97,7 +95,6 @@
 
   .div-times{
     margin-top:15px;
-    /* color: #0076a4ba; */
   }
 
   .info-div {
@@ -117,13 +114,8 @@
     flex-direction: row;
     text-align:center;
     justify-content: center;
-    /* margin:5px; */
     padding:7px;
-
   }
 
-  .yt-url{
-    /* margin:5px; */
-  }
 
   
